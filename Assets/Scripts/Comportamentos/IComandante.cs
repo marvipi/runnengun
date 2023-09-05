@@ -9,9 +9,13 @@ namespace Comportamentos
     public interface IComandante
     {
         /// <summary>
-        /// Registra a execução de um comando.
+        /// O objeto pai mais próximo deste objeto na hierarquia da cena.
         /// </summary>
-        /// <param name="comando"> O comando que deve ser registrado. </param>
-        public void RegistarExecucao(IComando comando);
+        public GameObject PaiObjeto { get; }
+
+        /// <summary>
+        /// Um componente IComandavel que faz parte do <see cref="PaiObjeto"/>.
+        /// </summary>
+        public IComandavel PaiComandavel { get; }
     }
 }

@@ -8,7 +8,10 @@ namespace Comportamentos
     /// </summary>
     public class Autodesativador : MonoBehaviour, IRemovedor
     {
+        public GameObject PaiObjeto { get; private set; }
+        public IComandavel PaiComandavel { get; private set; }
         public IComando ComandoRemoverSe { get; private set; }
+
 
         private void Start()
         {
@@ -18,13 +21,9 @@ namespace Comportamentos
         // Prepara este objeto para enviar e reverter comandos.
         private void Inicializar()
         {
+            PaiObjeto = transform.parent.gameObject;
+            PaiComandavel = PaiObjeto.GetComponent<IComandavel>();
             ComandoRemoverSe = gameObject.AddComponent<RemoverSe>();
-        }
-
-
-        public void RegistarExecucao(IComando comando)
-        {
-            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -32,7 +31,8 @@ namespace Comportamentos
         /// </summary>
         public void RemoverSe()
         {
-            ComandoRemoverSe.Executar(transform.parent.gameObject);
+            // TODO Registar comando no PaiComandavel
+            ComandoRemoverSe.Executar(PaiObjeto);
         }
 
         /// <summary>
@@ -40,7 +40,8 @@ namespace Comportamentos
         /// </summary>
         public void Reverter()
         {
-            ComandoRemoverSe.Reverter(transform.parent.gameObject);
+            // TODO Alterar o registro no PaiComandavel
+            ComandoRemoverSe.Reverter(PaiObjeto);
         }
     }
 }
