@@ -11,8 +11,6 @@ namespace ComportamentosTestSuite
         GameObject removerSe;
         IComando componenteRemoverSe;
         GameObject bonecoDeTeste;
-        GameObject filhoDeTeste1;
-        GameObject filhoDeTeste2;
 
         [SetUp]
         public void Setup()
@@ -20,12 +18,6 @@ namespace ComportamentosTestSuite
             removerSe = new GameObject("RemoverSe");
             componenteRemoverSe = removerSe.AddComponent<RemoverSe>();
             bonecoDeTeste = new GameObject("Boneco de teste");
-
-            filhoDeTeste1 = new GameObject("Primeiro filho de teste");
-            filhoDeTeste1.transform.SetParent(bonecoDeTeste.transform);
-
-            filhoDeTeste2 = new GameObject("Primeiro filho de teste");
-            filhoDeTeste2.transform.SetParent(bonecoDeTeste.transform);
         }
 
         [TearDown]
@@ -62,36 +54,73 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_UmFilhoAtivo_DesativaOFilho()
+        public IEnumerator Executar_TodosOsFilhosAtivos_DesativaTodosOsFilhos()
         {
+            InstanciarFilhos();
+
             yield return Executar();
 
-            Assert.False(filhoDeTeste1.activeInHierarchy);
+            AssertTodosFilhosDesativados();
         }
 
         [UnityTest]
-        public IEnumerator Executar_DoisFilhosAtivos_DesativaTodosOsFilhos()
+        public IEnumerator Executar_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes()
         {
+            var qtdExecucoes = 0;
+
+            InstanciarFilhos(4); // 4 filhos
+            yield return Executar();
+            qtdExecucoes++;
+            Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(true);
+
+            InstanciarFilhos(5); // 9 filhos
+            yield return Executar();
+            qtdExecucoes++;
+            Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(true);
+
+            InstanciarFilhos(6); // 15 filhos
+            yield return Executar();
+            qtdExecucoes++;
+            Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
+        }
+
+
+        [UnityTest]
+        public IEnumerator Executar_PrimeiroFilhoInativo_DesativaTodosOsFilhos()
+        {
+            InstanciarFilhos();
+            DesativarPrimeiroFilho();
+
             yield return Executar();
 
-            Assert.False(filhoDeTeste1.activeInHierarchy && filhoDeTeste2.activeInHierarchy);
+            AssertTodosFilhosDesativados();
+        }
+
+
+        [UnityTest]
+        public IEnumerator Executar_FilhoDoMeioInativo_DesativaTodosOsFilhos()
+        {
+            InstanciarFilhos();
+            DesativarFilhoDoMeio();
+
+            yield return Executar();
+
+            AssertTodosFilhosDesativados();
         }
 
         [UnityTest]
-        public IEnumerator Executar_UmFilhoAtivoEUmFilhoInativo_DesativaTodosOsFilhos()
+        public IEnumerator Executar_UltimoFilhoInativo_DesativaTodosOsFilhos()
         {
-            filhoDeTeste2.SetActive(false);
+            InstanciarFilhos();
+            DesativarUltimoFilho();
 
             yield return Executar();
 
-            Assert.False(filhoDeTeste1.activeInHierarchy && filhoDeTeste2.activeInHierarchy);
-        }
-
-        [UnityTest]
-        public IEnumerator Executar_DoisFilhosAtivos_IncrementaQtdRepeticoesUmaUnicaVez()
-        {
-            yield return Executar();
-            Assert.AreEqual(1, componenteRemoverSe.QtdRepeticoes);
+            AssertTodosFilhosDesativados();
         }
 
         [UnityTest]
@@ -131,47 +160,77 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_UmFilhoAtivo_ReativaOFilho()
+        public IEnumerator Reverter_PrimeiroFilhoInativo_AtivaTodosOsFilhos()
         {
+            InstanciarFilhos();
+            DesativarPrimeiroFilho();
+
             yield return ExecutarEReverter();
 
-            Assert.True(filhoDeTeste1.activeInHierarchy);
+            AssertTodosOsFilhosAtivos();
         }
 
         [UnityTest]
-        public IEnumerator Reverter_UmFilhoInativo_ReativaOFilho()
+        public IEnumerator Reverter_FilhoDoMeioInativo_AtivaTodosOsFilhos()
         {
-            filhoDeTeste1.SetActive(false);
+            InstanciarFilhos();
+            DesativarFilhoDoMeio();
 
             yield return ExecutarEReverter();
 
-            Assert.True(filhoDeTeste1.activeInHierarchy);
+            AssertTodosOsFilhosAtivos();
         }
 
         [UnityTest]
-        public IEnumerator Reverter_DoisFilhosInativos_AtivaTodosOsFilhos()
+        public IEnumerator Reverter_UltimoFilhoInativo_AtivaTodosOsFilhos()
         {
+            InstanciarFilhos();
+            DesativarUltimoFilho();
+
             yield return ExecutarEReverter();
 
-            Assert.True(filhoDeTeste1.activeInHierarchy && filhoDeTeste2.activeInHierarchy);
+            AssertTodosOsFilhosAtivos();
         }
 
         [UnityTest]
-        public IEnumerator Reverter_UmFilhoAtivoEUmFilhoInativo_AtivaTodosOsFilhos()
+        public IEnumerator Reverter_TodosOsFilhosAtivos_QtdFilhosNaoAfetaAQtdRepeticoes()
         {
-            filhoDeTeste2.SetActive(false);
+            var qtdExecucoes = 0;
+            var qtdReversoes = 0;
 
-            yield return ExecutarEReverter();
+            InstanciarFilhos(2); // 2 filhos
+            yield return Executar();
+            qtdExecucoes++;
 
-            Assert.True(filhoDeTeste1.activeInHierarchy && filhoDeTeste2.activeInHierarchy);
-        }
+            bonecoDeTeste.SetActive(true);
 
-        [UnityTest]
-        public IEnumerator Reverter_DoisFilhosInativos_DecrementaQtdRepeticoesUmaUnicaVez()
-        {
-            yield return ExecutarEReverter();
+            InstanciarFilhos(9); // 11 filhos
+            yield return Executar();
+            qtdExecucoes++;
 
-            Assert.Zero(componenteRemoverSe.QtdRepeticoes);
+            bonecoDeTeste.SetActive(true);
+
+            InstanciarFilhos(7); // 18 filhos
+            yield return Executar();
+            qtdExecucoes++;
+
+
+            System.Func<int> qtdRepeticoesEsperada = () => qtdExecucoes - qtdReversoes;
+            yield return Reverter();
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(false);
+
+            yield return Reverter();
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(false);
+
+            yield return Reverter();
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
         }
 
         private IEnumerator ExecutarEReverter()
@@ -190,6 +249,70 @@ namespace ComportamentosTestSuite
         {
             componenteRemoverSe.Reverter(bonecoDeTeste);
             yield return null;
+        }
+
+        private void AssertTodosOsFilhosAtivos()
+        {
+            foreach (Transform filho in bonecoDeTeste.transform)
+            {
+                Assert.True(filho.gameObject.activeInHierarchy);
+            }
+        }
+
+        private void AssertTodosFilhosDesativados()
+        {
+            foreach (Transform filho in bonecoDeTeste.transform)
+            {
+                Assert.False(filho.gameObject.activeInHierarchy);
+            }
+        }
+
+        // Instancia três objetos de jogo e os coloca como filhos do boneco de teste.
+        // Para testar todos os pontos de variância, é necessário que o boneco de teste tenha, pelo menos, três filhos.
+        private void InstanciarFilhos()
+        {
+            InstanciarFilhos(3);
+        }
+
+        // Instancia objetos de jogo e os coloca como filhos do boneco de teste.
+        private void InstanciarFilhos(uint qtdDeFilhos)
+        {
+            GameObject filhoDeTeste;
+            string nomeDoFilho;
+            for (int i = 0; i < qtdDeFilhos; i++)
+            {
+                nomeDoFilho = string.Format("Filho de teste (0)", i);
+                filhoDeTeste = new GameObject(nomeDoFilho);
+                filhoDeTeste.transform.SetParent(bonecoDeTeste.transform);
+            }
+        }
+
+        // Pressupõe que o boneco de teste tem pelo menos um filho.
+        private void DesativarPrimeiroFilho()
+        {
+            var indicePrimeiroFilho = 0;
+            DesativarFilho(indicePrimeiroFilho);
+        }
+
+        // Pressupõe que o boneco de teste tem pelo menos três filhos.
+        private void DesativarFilhoDoMeio()
+        {
+            var indiceFilhoDoMeio = bonecoDeTeste.transform.childCount / 2;
+            DesativarFilho(indiceFilhoDoMeio);
+        }
+
+        // Pressupõe que o boneco de teste tem pelo menos um filho.
+        private void DesativarUltimoFilho()
+        {
+            var indiceUltimoFilho = bonecoDeTeste.transform.childCount - 1;
+            DesativarFilho(indiceUltimoFilho);
+        }
+
+        // Desativa o filho do boneco de teste localizado no indice passado como argumento.
+        private void DesativarFilho(int indice)
+        {
+            var filho = bonecoDeTeste.transform.GetChild(indice);
+            filho.gameObject.SetActive(false);
         }
     }
 }
