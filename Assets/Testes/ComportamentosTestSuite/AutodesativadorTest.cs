@@ -32,7 +32,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicialização_InicializaOHistoricoDeComandos()
+        public IEnumerator Start_Inicializacao_InicializaOHistoricoDeComandos()
         {
             yield return null;
 
@@ -47,7 +47,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator RemoverSe_Execucao_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
+        public IEnumerator RemoverSe_Integracao_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
             yield return RemoverSe();
 
@@ -55,7 +55,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_UmaExecucao_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
+        public IEnumerator Reverter_Integracao_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
             yield return RemoverSe();
             componenteAutodesativador.Reverter();
