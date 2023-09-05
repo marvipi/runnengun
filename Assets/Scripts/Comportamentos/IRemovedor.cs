@@ -5,10 +5,10 @@ namespace Comportamentos
     /// <summary>
     /// Permite que objetos se removam do jogo.
     /// </summary>
-    public interface IRemovivel : IComandavel
+    public interface IRemovedor : IComandante
     {
         /// <summary>
-        /// A sequência de operações que este objeto executa para se remover do jogo.
+        /// Um comando que remove objetos do jogo.
         /// </summary>
         public IComando ComandoRemoverSe { get; }
 

@@ -6,9 +6,8 @@ namespace Comportamentos
     /// <summary>
     /// Permite que um objeto de jogo remova a árvore de objetos à qual ele pertence.
     /// </summary>
-    public class Autodesativador : MonoBehaviour, IRemovivel
+    public class Autodesativador : MonoBehaviour, IRemovedor
     {
-        public Stack<IComando> HistoricoDeComandos { get; private set; }
         public IComando ComandoRemoverSe { get; private set; }
 
         private void Start()
@@ -16,11 +15,16 @@ namespace Comportamentos
             Inicializar();
         }
 
-        // Prepara este objeto para receber comandos.
+        // Prepara este objeto para enviar e reverter comandos.
         private void Inicializar()
         {
-            HistoricoDeComandos = new Stack<IComando>();
             ComandoRemoverSe = gameObject.AddComponent<RemoverSe>();
+        }
+
+
+        public void RegistarExecucao(IComando comando)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -38,7 +42,5 @@ namespace Comportamentos
         {
             ComandoRemoverSe.Reverter(transform.parent.gameObject);
         }
-
-
     }
 }

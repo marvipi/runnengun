@@ -1,21 +1,23 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Comportamentos
 {
     /// <summary>
-    /// Permite que um objeto de jogo execute e reverta todos os comandos atribuidos a ele.
+    /// Permite que comandos sejam executados e registrados neste objeto.
     /// </summary>
     public interface IComandavel
     {
         /// <summary>
-        /// Contém os últimos comandos executados por este objeto.
+        /// Os últimos comandos executados neste objeto.
         /// </summary>
         public Stack<IComando> HistoricoDeComandos { get; }
 
         /// <summary>
-        /// Reverte os últimos comandos executados por este objeto.
+        /// Registra que um comando foi executado neste objeto.
         /// </summary>
-        public void Reverter();
+        /// <param name="comando"> Um comando que acaba de ser executado neste objeto. </param>
+        public void Registrar(IComando comando);
     }
 }

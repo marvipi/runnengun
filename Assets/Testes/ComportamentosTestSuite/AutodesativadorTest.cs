@@ -32,13 +32,6 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicializacao_InicializaOHistoricoDeComandos()
-        {
-            yield return null;
-
-            Assert.NotNull(componenteAutodesativador.HistoricoDeComandos);
-        }
-        [UnityTest]
         public IEnumerator Start_Inicializacao_AdicionaUmComponenteRemoverSe()
         {
             yield return null;
