@@ -30,7 +30,8 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Executar_ObjetoAtivoSemFilhos_DesativaOObjeto()
         {
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             Assert.False(bonecoDeTeste.activeInHierarchy);
         }
@@ -38,7 +39,8 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Executar_ObjetoAtivoSemFilhos_IncrementaQtdRepeticoes()
         {
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             Assert.AreEqual(1, componenteRemoverSe.QtdRepeticoes);
         }
@@ -48,7 +50,8 @@ namespace ComportamentosTestSuite
         {
             bonecoDeTeste.SetActive(false);
 
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             Assert.Zero(componenteRemoverSe.QtdRepeticoes);
         }
@@ -58,7 +61,8 @@ namespace ComportamentosTestSuite
         {
             InstanciarFilhos();
 
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             AssertTodosFilhosDesativados();
         }
@@ -69,21 +73,27 @@ namespace ComportamentosTestSuite
             var qtdExecucoes = 0;
 
             InstanciarFilhos(4); // 4 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
             Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
 
             bonecoDeTeste.SetActive(true);
 
             InstanciarFilhos(5); // 9 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
             Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
 
             bonecoDeTeste.SetActive(true);
 
             InstanciarFilhos(6); // 15 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
             Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
         }
@@ -95,7 +105,9 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarPrimeiroFilho();
 
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+
 
             AssertTodosFilhosDesativados();
         }
@@ -107,7 +119,8 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarFilhoDoMeio();
 
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             AssertTodosFilhosDesativados();
         }
@@ -118,7 +131,8 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarUltimoFilho();
 
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             AssertTodosFilhosDesativados();
         }
@@ -126,7 +140,10 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_ObjetoAtivoSemFilhos_ReativaOObjeto()
         {
-            yield return ExecutarEReverter();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             Assert.True(bonecoDeTeste.activeInHierarchy);
         }
@@ -134,7 +151,10 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_ObjetoAtivoSemFilhos_DecrementaQtdRepeticoes()
         {
-            yield return ExecutarEReverter();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             Assert.Zero(componenteRemoverSe.QtdRepeticoes);
         }
@@ -142,7 +162,8 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_ObjetoAtivoSemFilhos_NaoReverteSeQtdRepeticoesFor0()
         {
-            yield return Reverter();
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             Assert.Zero(componenteRemoverSe.QtdRepeticoes);
         }
@@ -150,11 +171,13 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_ObjetoInativoSemFilhos_NaoReverteObjetoAtivo()
         {
-            yield return Executar();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
 
             bonecoDeTeste.SetActive(true);
 
-            yield return Reverter();
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             Assert.AreEqual(1, componenteRemoverSe.QtdRepeticoes);
         }
@@ -165,7 +188,10 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarPrimeiroFilho();
 
-            yield return ExecutarEReverter();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             AssertTodosOsFilhosAtivos();
         }
@@ -176,7 +202,10 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarFilhoDoMeio();
 
-            yield return ExecutarEReverter();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             AssertTodosOsFilhosAtivos();
         }
@@ -187,7 +216,10 @@ namespace ComportamentosTestSuite
             InstanciarFilhos();
             DesativarUltimoFilho();
 
-            yield return ExecutarEReverter();
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
 
             AssertTodosOsFilhosAtivos();
         }
@@ -199,56 +231,47 @@ namespace ComportamentosTestSuite
             var qtdReversoes = 0;
 
             InstanciarFilhos(2); // 2 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
 
             bonecoDeTeste.SetActive(true);
 
             InstanciarFilhos(9); // 11 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
 
             bonecoDeTeste.SetActive(true);
 
             InstanciarFilhos(7); // 18 filhos
-            yield return Executar();
+
+            componenteRemoverSe.Executar(bonecoDeTeste);
+            yield return null;
             qtdExecucoes++;
 
 
             System.Func<int> qtdRepeticoesEsperada = () => qtdExecucoes - qtdReversoes;
-            yield return Reverter();
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
-
-            bonecoDeTeste.SetActive(false);
-
-            yield return Reverter();
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
-
-            bonecoDeTeste.SetActive(false);
-
-            yield return Reverter();
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
-        }
-
-        private IEnumerator ExecutarEReverter()
-        {
-            yield return Executar();
-            yield return Reverter();
-        }
-
-        private IEnumerator Executar()
-        {
-            componenteRemoverSe.Executar(bonecoDeTeste);
-            yield return null;
-        }
-
-        private IEnumerator Reverter()
-        {
             componenteRemoverSe.Reverter(bonecoDeTeste);
             yield return null;
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(false);
+
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
+
+            bonecoDeTeste.SetActive(false);
+
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
+            qtdReversoes++;
+            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
         }
 
         private void AssertTodosOsFilhosAtivos()
