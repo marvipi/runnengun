@@ -6,20 +6,14 @@ namespace Comportamentos
     /// <summary>
     /// Permite que um objeto de jogo remova a árvore de objetos à qual ele pertence.
     /// </summary>
-    public class Autodesativador : MonoBehaviour, IRemovedor
+    public class Autodesativador : Removedor
     {
-        public GameObject PaiObjeto { get; private set; }
-        public Comandavel PaiComandavel { get; private set; }
-        public IComando ComandoRemover { get; private set; }
-
-
         private void Start()
         {
             Inicializar();
         }
 
-        // Prepara este objeto para enviar e reverter comandos.
-        private void Inicializar()
+        private protected override void Inicializar()
         {
             PaiObjeto = transform.parent.gameObject;
             PaiComandavel = PaiObjeto.GetComponent<Comandavel>();
@@ -29,7 +23,7 @@ namespace Comportamentos
         /// <summary>
         /// Remove a árvore de objeto à qual este objeto pertence, delimitada pelo seu objeto pai mais próximo.
         /// </summary>
-        public void Remover()
+        public override void Remover()
         {
             // TODO Registar comando no PaiComandavel
             ComandoRemover.Executar(PaiObjeto);
