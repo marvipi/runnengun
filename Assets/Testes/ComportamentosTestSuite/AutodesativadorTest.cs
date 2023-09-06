@@ -1,3 +1,4 @@
+using Atores;
 using Comportamentos;
 using NUnit.Framework;
 using System.Collections;
@@ -16,8 +17,9 @@ namespace ComportamentosTestSuite
         public void Setup()
         {
             bonecoDeTeste = new GameObject("Boneco de teste");
-            objetoAutodesativador = new GameObject("Autodesativador");
+            bonecoDeTeste.AddComponent<Jogador1>();
 
+            objetoAutodesativador = new GameObject("Autodesativador");
             objetoAutodesativador.AddComponent<Autodesativador>();
             objetoAutodesativador.transform.SetParent(bonecoDeTeste.transform);
 
@@ -29,6 +31,22 @@ namespace ComportamentosTestSuite
         {
             Object.Destroy(bonecoDeTeste);
             Object.Destroy(objetoAutodesativador);
+        }
+
+        [UnityTest]
+        public IEnumerator Start_Inicializacao_ArmazenaReferenciaAOObjetoDeJogoPai()
+        {
+            yield return null;
+
+            Assert.NotNull(componenteAutodesativador.PaiObjeto);
+        }
+
+        [UnityTest]
+        public IEnumerator Start_Inicializacao_ArmazenaReferenceAOComponenteComandavelDoPai()
+        {
+            yield return null;
+
+            Assert.NotNull(componenteAutodesativador.PaiComandavel);
         }
 
         [UnityTest]
