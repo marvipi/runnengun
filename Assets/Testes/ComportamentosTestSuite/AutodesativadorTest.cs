@@ -34,19 +34,11 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicializacao_ArmazenaReferenciaAOObjetoDeJogoPai()
+        public IEnumerator Start_Inicializacao_ArmazenaReferenceAOPai()
         {
             yield return null;
 
-            Assert.NotNull(componenteAutodesativador.PaiObjeto);
-        }
-
-        [UnityTest]
-        public IEnumerator Start_Inicializacao_ArmazenaReferenceAOComponenteComandavelDoPai()
-        {
-            yield return null;
-
-            Assert.NotNull(componenteAutodesativador.PaiComandavel);
+            Assert.NotNull(componenteAutodesativador.Pai);
         }
 
         [UnityTest]

@@ -7,8 +7,7 @@ namespace Comportamentos
     /// </summary>
     public abstract class Removedor : MonoBehaviour, IComandante
     {
-        public GameObject PaiObjeto { get; private protected set; }
-        public Comandavel PaiComandavel { get; private protected set; }
+        public Comandavel Pai { get; private protected set; }
 
         /// <summary>
         /// Um comando que remove objetos do jogo.

@@ -15,8 +15,7 @@ namespace Comportamentos
 
         private protected override void Inicializar()
         {
-            PaiObjeto = transform.parent.gameObject;
-            PaiComandavel = PaiObjeto.GetComponent<Comandavel>();
+            Pai = transform.parent.gameObject.GetComponent<Comandavel>();
             ComandoRemover = gameObject.AddComponent<Remover>();
         }
 
@@ -26,7 +25,7 @@ namespace Comportamentos
         public override void Remover()
         {
             // TODO Registar comando no PaiComandavel
-            ComandoRemover.Executar(PaiObjeto);
+            ComandoRemover.Executar(Pai.gameObject);
         }
 
         /// <summary>
@@ -35,7 +34,7 @@ namespace Comportamentos
         public void Reverter()
         {
             // TODO Alterar o registro no PaiComandavel
-            ComandoRemover.Reverter(PaiObjeto);
+            ComandoRemover.Reverter(Pai.gameObject);
         }
     }
 }
