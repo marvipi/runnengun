@@ -16,6 +16,6 @@ namespace Comportamentos
         /// <summary>
         /// Um componente IComandavel que faz parte do <see cref="PaiObjeto"/>.
         /// </summary>
-        public IComandavel PaiComandavel { get; }
+        public Comandavel PaiComandavel { get; }
     }
 }

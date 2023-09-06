@@ -9,7 +9,7 @@ namespace Comportamentos
     public class Autodesativador : MonoBehaviour, IRemovedor
     {
         public GameObject PaiObjeto { get; private set; }
-        public IComandavel PaiComandavel { get; private set; }
+        public Comandavel PaiComandavel { get; private set; }
         public IComando ComandoRemoverSe { get; private set; }
 
 
@@ -22,7 +22,7 @@ namespace Comportamentos
         private void Inicializar()
         {
             PaiObjeto = transform.parent.gameObject;
-            PaiComandavel = PaiObjeto.GetComponent<IComandavel>();
+            PaiComandavel = PaiObjeto.GetComponent<Comandavel>();
             ComandoRemoverSe = gameObject.AddComponent<RemoverSe>();
         }
 
