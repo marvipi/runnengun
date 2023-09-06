@@ -60,7 +60,8 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator RemoverSe_Integracao_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
-            yield return RemoverSe();
+            componenteAutodesativador.RemoverSe();
+            yield return null;
 
             Assert.False(bonecoDeTeste.activeInHierarchy);
         }
@@ -68,17 +69,12 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_Integracao_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
-            yield return RemoverSe();
+            componenteAutodesativador.RemoverSe();
+            yield return null;
             componenteAutodesativador.Reverter();
             yield return null;
 
             Assert.True(bonecoDeTeste.activeInHierarchy);
-        }
-
-        private IEnumerator RemoverSe()
-        {
-            componenteAutodesativador.RemoverSe();
-            yield return null;
         }
     }
 }
