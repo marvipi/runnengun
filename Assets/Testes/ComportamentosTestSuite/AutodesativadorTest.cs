@@ -34,7 +34,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicializacao_ArmazenaReferenceAOPai()
+        public IEnumerator Start_Inicializacao_ArmazenaUmaReferenciaAOPai()
         {
             yield return null;
 
