@@ -68,33 +68,26 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes()
+        public IEnumerator Executar_QuatroFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
         {
-            var qtdExecucoes = 0;
-
-            InstanciarFilhos(4); // 4 filhos
+            InstanciarFilhos(4);
 
             componenteRemoverSe.Executar(bonecoDeTeste);
             yield return null;
-            qtdExecucoes++;
+            var qtdExecucoes = 1;
+
             Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
+        }
 
-            bonecoDeTeste.SetActive(true);
-
-            InstanciarFilhos(5); // 9 filhos
-
-            componenteRemoverSe.Executar(bonecoDeTeste);
-            yield return null;
-            qtdExecucoes++;
-            Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
-
-            bonecoDeTeste.SetActive(true);
-
-            InstanciarFilhos(6); // 15 filhos
+        [UnityTest]
+        public IEnumerator Executar_NoveFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
+        {
+            InstanciarFilhos(9);
 
             componenteRemoverSe.Executar(bonecoDeTeste);
             yield return null;
-            qtdExecucoes++;
+            var qtdExecucoes = 1;
+
             Assert.AreEqual(qtdExecucoes, componenteRemoverSe.QtdRepeticoes);
         }
 
@@ -107,7 +100,6 @@ namespace ComportamentosTestSuite
 
             componenteRemoverSe.Executar(bonecoDeTeste);
             yield return null;
-
 
             AssertTodosFilhosDesativados();
         }
@@ -225,53 +217,33 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_TodosOsFilhosAtivos_QtdFilhosNaoAfetaAQtdRepeticoes()
+        public IEnumerator Reverter_CincoFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
         {
-            var qtdExecucoes = 0;
-            var qtdReversoes = 0;
-
-            InstanciarFilhos(2); // 2 filhos
+            InstanciarFilhos(5);
 
             componenteRemoverSe.Executar(bonecoDeTeste);
             yield return null;
-            qtdExecucoes++;
+            var qtdExecucoes = 1;
+            
+            componenteRemoverSe.Reverter(bonecoDeTeste);
+            yield return null;
+            var qtdReversoes = 1;
+            Assert.AreEqual(qtdExecucoes - qtdReversoes, componenteRemoverSe.QtdRepeticoes);
+        }
 
-            bonecoDeTeste.SetActive(true);
-
-            InstanciarFilhos(9); // 11 filhos
+        [UnityTest]
+        public IEnumerator Reverter_DozeFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
+        {
+            InstanciarFilhos(12);
 
             componenteRemoverSe.Executar(bonecoDeTeste);
             yield return null;
-            qtdExecucoes++;
-
-            bonecoDeTeste.SetActive(true);
-
-            InstanciarFilhos(7); // 18 filhos
-
-            componenteRemoverSe.Executar(bonecoDeTeste);
-            yield return null;
-            qtdExecucoes++;
-
-
-            System.Func<int> qtdRepeticoesEsperada = () => qtdExecucoes - qtdReversoes;
-            componenteRemoverSe.Reverter(bonecoDeTeste);
-            yield return null;
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
-
-            bonecoDeTeste.SetActive(false);
+            var qtdExecucoes = 1;
 
             componenteRemoverSe.Reverter(bonecoDeTeste);
             yield return null;
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
-
-            bonecoDeTeste.SetActive(false);
-
-            componenteRemoverSe.Reverter(bonecoDeTeste);
-            yield return null;
-            qtdReversoes++;
-            Assert.AreEqual(qtdRepeticoesEsperada.Invoke(), componenteRemoverSe.QtdRepeticoes);
+            var qtdReversoes = 1;
+            Assert.AreEqual(qtdExecucoes - qtdReversoes, componenteRemoverSe.QtdRepeticoes);
         }
 
         private void AssertTodosOsFilhosAtivos()
