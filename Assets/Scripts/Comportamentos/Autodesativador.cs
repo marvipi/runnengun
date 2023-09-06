@@ -10,7 +10,7 @@ namespace Comportamentos
     {
         public GameObject PaiObjeto { get; private set; }
         public Comandavel PaiComandavel { get; private set; }
-        public IComando ComandoRemoverSe { get; private set; }
+        public IComando ComandoRemover { get; private set; }
 
 
         private void Start()
@@ -23,16 +23,16 @@ namespace Comportamentos
         {
             PaiObjeto = transform.parent.gameObject;
             PaiComandavel = PaiObjeto.GetComponent<Comandavel>();
-            ComandoRemoverSe = gameObject.AddComponent<RemoverSe>();
+            ComandoRemover = gameObject.AddComponent<Remover>();
         }
 
         /// <summary>
         /// Remove a árvore de objeto à qual este objeto pertence, delimitada pelo seu objeto pai mais próximo.
         /// </summary>
-        public void RemoverSe()
+        public void Remover()
         {
             // TODO Registar comando no PaiComandavel
-            ComandoRemoverSe.Executar(PaiObjeto);
+            ComandoRemover.Executar(PaiObjeto);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Comportamentos
         public void Reverter()
         {
             // TODO Alterar o registro no PaiComandavel
-            ComandoRemoverSe.Reverter(PaiObjeto);
+            ComandoRemover.Reverter(PaiObjeto);
         }
     }
 }

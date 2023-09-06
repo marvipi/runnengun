@@ -10,11 +10,11 @@ namespace Comportamentos
         /// <summary>
         /// Um comando que remove objetos do jogo.
         /// </summary>
-        public IComando ComandoRemoverSe { get; }
+        public IComando ComandoRemover { get; }
 
         /// <summary>
         /// Remove um objeto do jogo.
         /// </summary>
-        public void RemoverSe();
+        public void Remover();
     }
 }

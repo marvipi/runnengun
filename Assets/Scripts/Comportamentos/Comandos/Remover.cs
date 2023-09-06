@@ -5,7 +5,7 @@ namespace Comportamentos
     /// <summary>
     /// Remove um objeto e todos os filhos dele do jogo, impedindo que eles interajam com os outros objetos.
     /// </summary>
-    public class RemoverSe : MonoBehaviour, IComando
+    public class Remover : MonoBehaviour, IComando
     {
         public uint QtdRepeticoes { get; private set; }
 
