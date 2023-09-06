@@ -9,7 +9,7 @@ namespace Comportamentos
     public interface IComandante
     {
         /// <summary>
-        /// O objeto pai mas próximo deste objeto.
+        /// O objeto pai mas próximo deste objeto na hierarquia da cena.
         /// </summary>
         public Comandavel Pai { get; }
     }
