@@ -1,4 +1,4 @@
-using Comportamentos;
+using Atores;
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
