@@ -12,7 +12,7 @@ namespace Atores
         /// <summary>
         /// Um comando que remove objetos do jogo.
         /// </summary>
-        private protected IComando ComandoRemover { get; set; }
+        private protected IAcao ComandoRemover { get; set; }
 
         /// <summary>
         /// Inicializa todas as referências necessárias para o funcionamento deste comportamento.

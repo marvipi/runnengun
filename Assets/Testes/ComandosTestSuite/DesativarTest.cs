@@ -9,7 +9,7 @@ namespace ComportamentosTestSuite
     public class DesativarTest
     {
         GameObject desativar;
-        IComando componenteDesativar;
+        IAcao componenteDesativar;
         GameObject bonecoDeTeste;
         Comandavel componenteComandavel;
 
