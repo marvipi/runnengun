@@ -6,11 +6,11 @@ using UnityEngine.TestTools;
 
 namespace ComportamentosTestSuite
 {
-    public class AutodesativadorTest
+    public class DesativadorTest
     {
         GameObject bonecoDeTeste;
-        GameObject objetoAutodesativador;
-        Autodesativador componenteAutodesativador;
+        GameObject objetoDesativador;
+        Desativador componenteDesativador;
 
         [SetUp]
         public void Setup()
@@ -18,18 +18,18 @@ namespace ComportamentosTestSuite
             bonecoDeTeste = new GameObject("Boneco de teste");
             bonecoDeTeste.AddComponent<Jogador1>();
 
-            objetoAutodesativador = new GameObject("Autodesativador");
-            objetoAutodesativador.AddComponent<Autodesativador>();
-            objetoAutodesativador.transform.SetParent(bonecoDeTeste.transform);
+            objetoDesativador = new GameObject("Desativador");
+            objetoDesativador.AddComponent<Desativador>();
+            objetoDesativador.transform.SetParent(bonecoDeTeste.transform);
 
-            componenteAutodesativador = objetoAutodesativador.GetComponent<Autodesativador>();
+            componenteDesativador = objetoDesativador.GetComponent<Desativador>();
         }
 
         [TearDown]
         public void Teardown()
         {
             Object.Destroy(bonecoDeTeste);
-            Object.Destroy(objetoAutodesativador);
+            Object.Destroy(objetoDesativador);
         }
 
         [UnityTest]
@@ -37,7 +37,7 @@ namespace ComportamentosTestSuite
         {
             yield return null;
 
-            Assert.NotNull(componenteAutodesativador.Pai);
+            Assert.NotNull(componenteDesativador.Pai);
         }
 
         [UnityTest]
@@ -45,13 +45,13 @@ namespace ComportamentosTestSuite
         {
             yield return null;
 
-            Assert.NotNull(componenteAutodesativador);
+            Assert.NotNull(componenteDesativador);
         }
 
         [UnityTest]
         public IEnumerator Remover_Integracao_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
-            componenteAutodesativador.Remover();
+            componenteDesativador.Remover();
             yield return null;
 
             Assert.False(bonecoDeTeste.activeInHierarchy);
@@ -60,9 +60,9 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_Integracao_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
-            componenteAutodesativador.Remover();
+            componenteDesativador.Remover();
             yield return null;
-            componenteAutodesativador.Reverter();
+            componenteDesativador.Reverter();
             yield return null;
 
             Assert.True(bonecoDeTeste.activeInHierarchy);

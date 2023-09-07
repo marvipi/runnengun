@@ -6,7 +6,7 @@ namespace Atores
     /// <summary>
     /// Permite que um objeto de jogo remova a árvore de objetos à qual ele pertence.
     /// </summary>
-    public class Autodesativador : Removedor
+    public class Desativador : Removedor
     {
         private void Start()
         {
