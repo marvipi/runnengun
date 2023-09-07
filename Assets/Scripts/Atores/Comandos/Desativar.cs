@@ -5,7 +5,7 @@ namespace Atores
     /// <summary>
     /// Remove um objeto e todos os filhos dele do jogo, impedindo que eles interajam com os outros objetos.
     /// </summary>
-    public class Remover : MonoBehaviour, IComando
+    public class Desativar : MonoBehaviour, IComando
     {
         public uint QtdRepeticoes { get; private set; }
 
