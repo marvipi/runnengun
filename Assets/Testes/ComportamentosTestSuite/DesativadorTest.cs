@@ -33,7 +33,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicializacao_ArmazenaUmaReferenciaAOPai()
+        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_ArmazenaUmaReferenciaAOPai()
         {
             yield return null;
 
@@ -41,7 +41,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Start_Inicializacao_AdicionaUmComponenteRemover()
+        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_AdicionaUmComponenteRemover()
         {
             yield return null;
 
@@ -49,7 +49,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Remover_Integracao_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
+        public IEnumerator Remover_ComandavelPedeParaSerDesativado_DesativaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
             componenteDesativador.Remover();
             yield return null;
@@ -58,7 +58,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_Integracao_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
+        public IEnumerator Reverter_ComandavelPedeParaSerAtivado_AtivaArvoreDeObjetosAQualOAutodesativadorPertence()
         {
             componenteDesativador.Remover();
             yield return null;
