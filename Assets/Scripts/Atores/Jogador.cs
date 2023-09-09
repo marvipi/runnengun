@@ -10,7 +10,7 @@ namespace Atores
     /// <para>
     ///     Cada jogador tem:
     ///     <list type="bullet">
-    ///     <item><description> De 0 a 3 vidas. </description></item>
+    ///     <item><description> De 0 a 9 vidas. </description></item>
     ///     <item><description> De 0 a Uint32.MaxValue pontos. </description></item>
     ///     </list>
     /// </para>
