@@ -85,5 +85,17 @@ namespace ComportamentosTestSuite
             var spriteFinal = spriteRenderer.flipY;
             Assert.AreNotEqual(spriteFinal, spriteInicial);
         }
+
+        [UnityTest]
+        public IEnumerator Virar_ComandavelPedeParaVirar_AVelocidadeDoCorredorEInvertida()
+        {
+            var velocidadeInicial = componenteCorredor.Velocidade;
+
+            componenteCorredor.Virar();
+            yield return new WaitForFixedUpdate();
+
+            var velocidadeInvertida = -velocidadeInicial;
+            Assert.AreEqual(velocidadeInvertida, componenteCorredor.Velocidade);
+        }
     }
 }

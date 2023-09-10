@@ -36,6 +36,7 @@ namespace Atores
 
         public override void Virar()
         {
+            Velocidade = -Velocidade;
             comandoVirar.Executar(Pai);
         }
     }

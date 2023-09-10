@@ -16,7 +16,7 @@ namespace Atores
 
         [field: SerializeField]
         [field: Tooltip("A velocidade com a qual um objeto de jogo se movimenta.")]
-        private protected float Velocidade { get; set; }
+        public float Velocidade { get; private protected set; }
 
         /// <summary>
         /// Um comando que move um objeto adiante.
