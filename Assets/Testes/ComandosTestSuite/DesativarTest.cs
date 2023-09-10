@@ -227,7 +227,7 @@ namespace ComportamentosTestSuite
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
             var qtdExecucoes = 1;
-            
+
             componenteDesativar.Reverter(componenteComandavel);
             yield return null;
             var qtdReversoes = 1;

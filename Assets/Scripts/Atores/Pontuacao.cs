@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Atores
@@ -87,7 +86,8 @@ namespace Atores
             if (pontuacaoMaximaSeraUltrapassada)
             {
                 QtdPontos = MAX_PONTUACAO;
-            } else
+            }
+            else
             {
                 QtdPontos += qtdPontos;
             }

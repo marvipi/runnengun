@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Atores;
 using Auxiliares;
 using NUnit.Framework;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;

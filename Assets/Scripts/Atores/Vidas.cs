@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Atores
@@ -86,7 +85,8 @@ namespace Atores
             if (QtdVidas == MIN_VIDAS)
             {
                 morrer?.Invoke();
-            } else
+            }
+            else
             {
                 QtdVidas--;
             }

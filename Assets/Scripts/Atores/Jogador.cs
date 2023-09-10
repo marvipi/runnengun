@@ -1,5 +1,4 @@
 using Auxiliares;
-using UnityEngine;
 
 namespace Atores
 {
