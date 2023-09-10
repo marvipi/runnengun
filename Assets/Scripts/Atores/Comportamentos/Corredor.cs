@@ -29,17 +29,11 @@ namespace Atores
             comandoVirar = gameObject.AddComponent<Virar>();
         }
 
-        /// <summary>
-        /// Move o objeto pai imediato adiante.
-        /// </summary>
         public override void Avancar()
         {
             comandoAvancar.Executar(Pai, Eixo.Horizontal, Velocidade);
         }
 
-        /// <summary>
-        /// Inverte o sentido em que o objeto pai mais próximo é movido.
-        /// </summary>
         public override void Virar()
         {
             comandoVirar.Executar(Pai);

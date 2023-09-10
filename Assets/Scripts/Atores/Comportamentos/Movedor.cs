@@ -24,7 +24,7 @@ namespace Atores
         private protected IMovimento comandoAvancar { get; set; }
 
         /// <summary>
-        /// Um comando que altera o sentido em que um objeto é movido.
+        /// Um comando que altera o sentido do sprite de um objeto.
         /// </summary>
         private protected IAcao comandoVirar { get; set; }
 
