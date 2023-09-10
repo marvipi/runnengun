@@ -33,7 +33,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_ArmazenaUmaReferenciaAOPai()
+        public IEnumerator Inicializacao_ObjetoAcabaDeSerInstanciado_ArmazenaUmaReferenciaAOPai()
         {
             yield return null;
 
@@ -41,7 +41,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_AdicionaUmComponenteRemover()
+        public IEnumerator Inicializacao_ObjetoAcabaDeSerInstanciado_AdicionaUmComponenteRemover()
         {
             yield return null;
 

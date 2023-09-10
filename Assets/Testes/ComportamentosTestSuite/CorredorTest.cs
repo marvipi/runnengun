@@ -36,7 +36,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_AgregaOObjetoPai()
+        public IEnumerator Inicializacao_ObjetoAcabaDeSerInstanciado_AgregaOObjetoPai()
         {
             yield return null;
 
@@ -44,7 +44,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_AgregaOComandoAvancar()
+        public IEnumerator Inicializacao_ObjetoAcabaDeSerInstanciado_AgregaOComandoAvancar()
         {
             var avancar = objetoCorredor.GetComponent<Avancar>();
             yield return null;
@@ -53,7 +53,7 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Inicializar_ObjetoAcabaDeSerInstanciado_AgregaOComandoVirar()
+        public IEnumerator Inicializacao_ObjetoAcabaDeSerInstanciado_AgregaOComandoVirar()
         {
             var virar = objetoCorredor.GetComponent<Virar>();
             yield return null;
