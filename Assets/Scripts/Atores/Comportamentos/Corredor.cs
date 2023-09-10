@@ -8,7 +8,7 @@ namespace Atores
     /// Representa um elemento do jogo que se move horizontalmente.
     /// </summary>
     /// <remarks>
-    /// Para que um corredor funcione corretamente, é necessário que o objeto pai  imediato tenha cada um dos seguintes
+    /// Para que um corredor funcione corretamente, é necessário que o objeto pai imediato tenha cada um dos seguintes
     /// componentes:
     /// <list type="bullet">
     /// <item> <description> Rigidbody2D. </description></item>
