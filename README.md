@@ -4,7 +4,7 @@ Runnengun é um jogo 2D de plataforma, onde o jogador tem a capacidade de revert
 ### Propósito
 Estou desenvolvendo este projeto para pôr em prática os padrões de design que aprendi no curso [Design Patterns](https://www.coursera.org/learn/design-patterns) e os princípios SOLID. Ele foi projetado com a modularidade como principal característica.
 ### Design
-![[runnengun-design.jpg]]
+![runnengun-design](https://github.com/marvipi/runnengun/assets/136832870/2c984898-a5e2-496c-855b-499b3b9ef6c7)
 
 Cada elemento do jogo tem funcionalidades atribuídas a ele dinamicamente. Elas são testadas individualmente, assegurando que elas funcionem em todos os elementos que supram os seus requisitos.
 
