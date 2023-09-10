@@ -15,11 +15,6 @@ namespace Atores
         private protected IAcao ComandoRemover { get; set; }
 
         /// <summary>
-        /// Inicializa todas as referências necessárias para o funcionamento deste comportamento.
-        /// </summary>
-        private protected abstract void Inicializar();
-
-        /// <summary>
         /// Remove um objeto do jogo.
         /// </summary>
         public abstract void Remover();

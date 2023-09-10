@@ -22,7 +22,7 @@ namespace Atores
             Inicializar();
         }
 
-        private protected override void Inicializar()
+        private void Inicializar()
         {
             Pai = transform.parent.GetComponent<Comandavel>();
             comandoAvancar = gameObject.AddComponent<Avancar>();

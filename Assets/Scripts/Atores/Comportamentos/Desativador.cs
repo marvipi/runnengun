@@ -13,7 +13,7 @@ namespace Atores
             Inicializar();
         }
 
-        private protected override void Inicializar()
+        private void Inicializar()
         {
             Pai = transform.parent.gameObject.GetComponent<Comandavel>();
             ComandoRemover = gameObject.AddComponent<Desativar>();

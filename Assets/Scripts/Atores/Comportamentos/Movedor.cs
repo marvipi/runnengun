@@ -29,11 +29,6 @@ namespace Atores
         private protected IAcao comandoVirar { get; set; }
 
         /// <summary>
-        /// Inicializa todos os componentes necessários para o funcionamento deste objeto.
-        /// </summary>
-        private protected abstract void Inicializar();
-
-        /// <summary>
         /// Move o objeto pai mais próximo adiante.
         /// </summary>
         public abstract void Avancar();
