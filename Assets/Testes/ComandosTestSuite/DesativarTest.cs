@@ -62,7 +62,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Executar_TodosOsFilhosAtivos_DesativaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -71,34 +71,21 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_QuatroFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
+        public IEnumerator Executar_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes([Values(1,6,10,15,21)] int qtdFilhos)
         {
-            InstanciarFilhos(4);
+            InstanciarFilhos((uint) qtdFilhos);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
-            var qtdExecucoes = 1;
 
-            Assert.AreEqual(qtdExecucoes, componenteDesativar.QtdRepeticoes);
-        }
-
-        [UnityTest]
-        public IEnumerator Executar_NoveFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
-        {
-            InstanciarFilhos(9);
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-            var qtdExecucoes = 1;
-
-            Assert.AreEqual(qtdExecucoes, componenteDesativar.QtdRepeticoes);
+            Assert.AreEqual(1, componenteDesativar.QtdRepeticoes);
         }
 
 
         [UnityTest]
         public IEnumerator Executar_PrimeiroFilhoInativo_DesativaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarPrimeiroFilho();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -111,7 +98,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Executar_FilhoDoMeioInativo_DesativaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarFilhoDoMeio();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -123,7 +110,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Executar_UltimoFilhoInativo_DesativaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarUltimoFilho();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -180,7 +167,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_PrimeiroFilhoInativo_AtivaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarPrimeiroFilho();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -194,7 +181,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_FilhoDoMeioInativo_AtivaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarFilhoDoMeio();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -208,7 +195,7 @@ namespace ComportamentosTestSuite
         [UnityTest]
         public IEnumerator Reverter_UltimoFilhoInativo_AtivaTodosOsFilhos()
         {
-            InstanciarFilhos();
+            InstanciarTresFilhos();
             DesativarUltimoFilho();
 
             componenteDesativar.Executar(componenteComandavel);
@@ -220,33 +207,16 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_CincoFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
+        public IEnumerator Reverter_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes([Values(8, 3, 5, 84, 1)] int qtdFilhos)
         {
-            InstanciarFilhos(5);
+            InstanciarFilhos((uint) qtdFilhos);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
-            var qtdExecucoes = 1;
-
             componenteDesativar.Reverter(componenteComandavel);
             yield return null;
-            var qtdReversoes = 1;
-            Assert.AreEqual(qtdExecucoes - qtdReversoes, componenteDesativar.QtdRepeticoes);
-        }
 
-        [UnityTest]
-        public IEnumerator Reverter_DozeFilhos_QtdFilhosNaoAfetaQtdRepeticoes()
-        {
-            InstanciarFilhos(12);
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-            var qtdExecucoes = 1;
-
-            componenteDesativar.Reverter(componenteComandavel);
-            yield return null;
-            var qtdReversoes = 1;
-            Assert.AreEqual(qtdExecucoes - qtdReversoes, componenteDesativar.QtdRepeticoes);
+            Assert.Zero(componenteDesativar.QtdRepeticoes);
         }
 
         private void AssertTodosOsFilhosAtivos()
@@ -266,8 +236,8 @@ namespace ComportamentosTestSuite
         }
 
         // Instancia três objetos de jogo e os coloca como filhos do boneco de teste.
-        // Para testar todos os pontos de variância, é necessário que o boneco de teste tenha, pelo menos, três filhos.
-        private void InstanciarFilhos()
+        // Para testar todos os pontos de variância, é necessário que o boneco de teste tenha pelo menos três filhos.
+        private void InstanciarTresFilhos()
         {
             InstanciarFilhos(3);
         }
