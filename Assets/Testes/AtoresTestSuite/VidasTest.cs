@@ -169,33 +169,40 @@ namespace AtoresTestSuite
             DesregistrarSinalQtdVidasAlterada();
         }
 
+        // Registra o método OnQtdVidasAlterada como ouvinte do sinal qtdVidasAlterada.
         private void RegistrarSinalQtdVidasAlterada()
         {
-            componenteVidas.qtdVidasAlteradas += OnQtdVidasAlterada;
+            componenteVidas.qtdVidasAlterada += OnQtdVidasAlterada;
         }
 
+        // Remove o método OnQtdVidasAlterada dos ouvintes do sinal qtdVidasAlterada e prepare o ambiente para o
+        // próximo teste.
         private void DesregistrarSinalQtdVidasAlterada()
         {
-            componenteVidas.qtdVidasAlteradas -= OnQtdVidasAlterada;
+            componenteVidas.qtdVidasAlterada -= OnQtdVidasAlterada;
             sinalQtdVidasAlteradaEnviado = false;
         }
 
+        // Registra que o sinal qtdVidasAlterada foi enviado pela vidas.
         private void OnQtdVidasAlterada()
         {
             sinalQtdVidasAlteradaEnviado = true;
         }
 
+        // Registra o método OnMorrer como ouvinte do sinal morrer.
         private void RegistrarSinalMorrer()
         {
             componenteVidas.morrer += OnMorrer;
         }
 
+        // Remove o método OnMorrer dos ouvintes do sinal morrer e prepare o ambiente para o próximo teste.
         private void DesregistrarSinalMorrer()
         {
             componenteVidas.morrer -= OnMorrer;
             sinalMorrerEnviado = false;
         }
 
+        // Registra que o sinal morrer foi enviado pelas vidas.
         private void OnMorrer()
         {
             sinalMorrerEnviado = true;

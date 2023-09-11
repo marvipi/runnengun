@@ -51,7 +51,7 @@ namespace Atores
             private set
             {
                 qtdVidas = value;
-                qtdVidasAlteradas?.Invoke();
+                qtdVidasAlterada?.Invoke();
             }
         }
 
@@ -63,7 +63,7 @@ namespace Atores
         /// <summary>
         /// Sinaliza que as vidas foram alteradas.
         /// </summary>
-        public event Action qtdVidasAlteradas;
+        public event Action qtdVidasAlterada;
 
         /// <summary>
         /// Incrementa a quantidade de vidas.

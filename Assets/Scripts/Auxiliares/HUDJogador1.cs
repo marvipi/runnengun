@@ -26,7 +26,6 @@ namespace Auxiliares
             Inicializar();
         }
 
-        // Inicializa os componentes do HUD para que eles possam ser atualizados.
         private void Inicializar()
         {
             LabelVidas = EncontrarLabel(TagLabelVidas);
@@ -42,6 +41,9 @@ namespace Auxiliares
             }
         }
 
+        // Encontra o primeiro label marcado com uma dada tag.
+        // Retorna o componente label do filho ou null, se este objeto de jogo não ter um filho marcado com a tag
+        // ou se o filho não ter um componente label.
         private TextMeshProUGUI EncontrarLabel(string tag)
         {
             foreach (Transform filho in gameObject.transform)

@@ -38,7 +38,7 @@ namespace Atores
             QtdRepeticoes--;
         }
 
-        // Move o rigidbody horizontalmente no dado eixo.
+        // Move o rigidbody no dado eixo.
         private void Mover(Rigidbody2D rigidbody2D, Eixo eixo, float delta)
         {
             var transformDoComandavel = rigidbody2D.transform;

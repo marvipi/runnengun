@@ -146,34 +146,40 @@ namespace AtoresTestSuite
             DesregistrarSinalPontuacaoAlterada();
         }
 
-
+        // Registra o método OnVidaGanha como ouvinte do sinal vidaGanha.
         private void RegistrarSinalVidaGanha()
         {
             componentePontuacao.vidaGanha += OnVidaGanha;
         }
 
+        // Remove o método OnVidaGanha dos ouvintes do sinal vidaGanha e prepara o ambiente para o próximo teste.
         private void DesregistrarSinalVidaGanha()
         {
             componentePontuacao.vidaGanha -= OnVidaGanha;
             sinalVidaGanhaEnviado = false;
         }
 
+        // Registra que o sinal vidaGanha foi enviado pela pontuação.
         private void OnVidaGanha()
         {
             sinalVidaGanhaEnviado = true;
         }
 
+        // Registra o método OnPontuacaoAlterada como ouvinte do sinal pontuacaoAlterada.
         private void RegistrarSinalPontuacaoAlterada()
         {
             componentePontuacao.pontuacaoAlterada += OnPontuacaoAlterada;
         }
 
+        // Remove o método OnPontuacaoAlterada dos ouvintes do sinal pontuacaoAlterada e prepara o ambiente para o
+        // próximo teste.
         private void DesregistrarSinalPontuacaoAlterada()
         {
             componentePontuacao.pontuacaoAlterada -= OnPontuacaoAlterada;
             sinalPontuacaoAlteradaEnviado = false;
         }
 
+        // Registra que o sinal pontuacaoAlterada foi enviado pela pontuação.
         private void OnPontuacaoAlterada()
         {
             sinalPontuacaoAlteradaEnviado = true;
