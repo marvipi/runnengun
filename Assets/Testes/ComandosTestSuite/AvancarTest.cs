@@ -17,6 +17,10 @@ namespace ComandosTestSuite
         // A quantidade de movimento e o sentido no qual o boneco de teste será movido.
         const float DELTA = 50f;
 
+        // A distância mínima entre a posição inicial e a posição após uma reversão, para que
+        // uma reversão seja considerada um sucesso.
+        const float DISTANCIA_REVERSAO = 0.01f;
+
         // A posição inicial do boneco de teste.
         Vector2 origem;
 
@@ -53,100 +57,49 @@ namespace ComandosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_EixoHorizontalDeltaPositivo_MoveOObjetoDeJogoParaADireta()
+        public IEnumerator Executar_EixoHorizontal_MoveOObjetoDeJogo([Values(DELTA, -DELTA)] float delta, [Values(Eixo.Horizontal)] Eixo eixo)
         {
-            PegarOrigemEDestino(DELTA, Eixo.Horizontal);
+            PegarOrigemEDestino(delta, eixo);
 
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, DELTA);
+            componenteAvancar.Executar(componenteComandavel, eixo, delta);
             yield return new WaitForFixedUpdate();
 
             CalcularDistancias();
 
-            Assert.LessOrEqual(distanciaAtual, distanciaInicial);
+            Assert.Less(distanciaAtual, distanciaInicial);
         }
 
         [UnityTest]
-        public IEnumerator Executar_EixoHorizontalDeltaPositivo_IncrementaQtdRepeticoes()
+        public IEnumerator Executar_EixoHorizontal_IncrementaQtdRepeticoes([Values(DELTA, -DELTA)] float delta, [Values(Eixo.Horizontal)] Eixo eixo)
         {
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, DELTA);
+            componenteAvancar.Executar(componenteComandavel, eixo, delta);
             yield return new WaitForFixedUpdate();
 
             Assert.AreEqual(1, componenteAvancar.QtdRepeticoes);
         }
 
         [UnityTest]
-        public IEnumerator Executar_EixoHorizontalDeltaNegativo_MoveOObjetoDeJogoParaAEsquerda()
+        public IEnumerator Reverter_EixoHorizontal_ReverteOUltimoAvanco([Values(DELTA, -DELTA)] float delta, [Values(Eixo.Horizontal)] Eixo eixo)
         {
-            PegarOrigemEDestino(-DELTA, Eixo.Horizontal);
+            PegarOrigemEDestino(delta, eixo);
 
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, -DELTA);
+            componenteAvancar.Executar(componenteComandavel, eixo, delta);
             yield return new WaitForFixedUpdate();
 
-            CalcularDistancias();
+            componenteAvancar.Reverter(componenteComandavel, eixo, -delta);
+            yield return new WaitForFixedUpdate();
 
-            Assert.LessOrEqual(distanciaAtual, distanciaInicial);
+            bool proximoOSuficiente = bonecoDeTeste.transform.position.x - origem.x < DISTANCIA_REVERSAO;
+            Assert.True(proximoOSuficiente);
         }
 
         [UnityTest]
-        public IEnumerator Executar_EixoHorizontalDeltaNegativo_IncrementaQtdRepeticoes()
+        public IEnumerator Reverter_EixoHorizontalDeltaPositivo_DecrementaQtdRepeticoes([Values(DELTA, -DELTA)] float delta, [Values(Eixo.Horizontal)] Eixo eixo)
         {
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, -DELTA);
+            componenteAvancar.Executar(componenteComandavel, eixo, delta);
             yield return new WaitForFixedUpdate();
 
-            Assert.AreEqual(1, componenteAvancar.QtdRepeticoes);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_EixoHorizontalDeltaPositivo_MoveOObjetoDeJogoParaADireita()
-        {
-            PegarOrigemEDestino(DELTA, Eixo.Horizontal);
-
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, DELTA);
-            yield return new WaitForFixedUpdate();
-
-            componenteAvancar.Reverter(componenteComandavel, Eixo.Horizontal, -DELTA);
-            yield return new WaitForFixedUpdate();
-
-            CalcularDistancias();
-
-            Assert.LessOrEqual(distanciaAtual, distanciaInicial);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_EixoHorizontalDeltaPositivo_DecrementaQtdRepeticoes()
-        {
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, DELTA);
-            yield return new WaitForFixedUpdate();
-
-            componenteAvancar.Reverter(componenteComandavel, Eixo.Horizontal, -DELTA);
-            yield return new WaitForFixedUpdate();
-
-            Assert.Zero(componenteAvancar.QtdRepeticoes);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_EixoHorizontalDeltaNegativo_MoveOObjetoDeJogoParaAEsquerda()
-        {
-            PegarOrigemEDestino(-DELTA, Eixo.Horizontal);
-
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, -DELTA);
-            yield return new WaitForFixedUpdate();
-
-            componenteAvancar.Reverter(componenteComandavel, Eixo.Horizontal, DELTA);
-            yield return new WaitForFixedUpdate();
-
-            CalcularDistancias();
-
-            Assert.LessOrEqual(distanciaAtual, distanciaInicial);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_EixoHorizontalDeltaNegativo_DecrementaQtdRepeticoes()
-        {
-            componenteAvancar.Executar(componenteComandavel, Eixo.Horizontal, -DELTA);
-            yield return new WaitForFixedUpdate();
-
-            componenteAvancar.Reverter(componenteComandavel, Eixo.Horizontal, DELTA);
+            componenteAvancar.Reverter(componenteComandavel, eixo, -delta);
             yield return new WaitForFixedUpdate();
 
             Assert.Zero(componenteAvancar.QtdRepeticoes);
