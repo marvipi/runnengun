@@ -33,16 +33,20 @@ namespace ComandosTestSuite
             Object.Destroy(virar);
         }
 
+
         [UnityTest]
-        public IEnumerator Executar_ObjetoInstanciadoEmDirecaoADireita_MudaOSentidoHorizontalDoSpriteParaAEsquerda()
+        public IEnumerator Executar_ObjetoAcabaDeSerInstanciado_MudaOSentidoHorizontalDoSprite([Values(false, true)] bool spriteInvertido)
         {
+            componenteSpriteRenderer.flipY = spriteInvertido;
+
             componenteVirar.Executar(componenteComandavel);
             yield return null;
-            Assert.True(componenteSpriteRenderer.flipY);
+
+            Assert.AreNotEqual(spriteInvertido, componenteSpriteRenderer.flipY);
         }
 
         [UnityTest]
-        public IEnumerator Executar_ObjetoInstanciadoEmDirecaoADireita_IncrementaQtdRepeticoes()
+        public IEnumerator Executar_ObjetoAcabaDeSerInstanciado_IncrementaQtdRepeticoes()
         {
             componenteVirar.Executar(componenteComandavel);
             yield return null;
@@ -50,55 +54,9 @@ namespace ComandosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_ObjetoInstanciadoEmDirecaoAEsquerda_MudaOSentidoHorizontalDoSpriteParaADireita()
+        public IEnumerator Reverter_ObjetoViradoUmaVez_MudaOSentidoDoSpriteDeVolta([Values(false, true)] bool spriteInvertido)
         {
-            componenteSpriteRenderer.flipY = true;
-
-            componenteVirar.Executar(componenteComandavel);
-            yield return null;
-
-            Assert.False(componenteSpriteRenderer.flipY);
-        }
-
-        [UnityTest]
-        public IEnumerator Executar_ObjetoInstanciadoEmDirecaoAEsquerda_IncrementaAQtdDeRepeticoes()
-        {
-            componenteSpriteRenderer.flipY = true;
-
-            componenteVirar.Executar(componenteComandavel);
-            yield return null;
-
-            Assert.AreEqual(1, componenteVirar.QtdRepeticoes);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_ObjetoInstanciadoEmDirecaoADireita_MudaOSentidoDoSpriteDeVoltaParaADireita()
-        {
-            componenteVirar.Executar(componenteComandavel);
-            yield return null;
-
-            componenteVirar.Reverter(componenteComandavel);
-            yield return null;
-
-            Assert.False(componenteSpriteRenderer.flipY);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_ObjetoInstanciadoEmDirecaoADireita_DecrementaQtdRepeticoes()
-        {
-            componenteVirar.Executar(componenteComandavel);
-            yield return null;
-
-            componenteVirar.Reverter(componenteComandavel);
-            yield return null;
-
-            Assert.Zero(componenteVirar.QtdRepeticoes);
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_ObjetoInstanciadoEmDirecaoAEsquerda_MudaOSentidoDoSpriteDeVoltaParaAEsquerda()
-        {
-            componenteSpriteRenderer.flipY = true;
+            componenteSpriteRenderer.flipY = spriteInvertido;
 
             componenteVirar.Executar(componenteComandavel);
             yield return null;
@@ -106,14 +64,12 @@ namespace ComandosTestSuite
             componenteVirar.Reverter(componenteComandavel);
             yield return null;
 
-            Assert.True(componenteSpriteRenderer.flipY);
+            Assert.AreEqual(spriteInvertido, componenteSpriteRenderer.flipY);
         }
 
         [UnityTest]
-        public IEnumerator Reverter_ObjetoInstanciadoEmDireçãoAEsquerda_DecrementaQtdRepeticoes()
+        public IEnumerator Reverter_ObjetoViradoUmaVez_DecrementaQtdRepeticoes()
         {
-            componenteSpriteRenderer.flipY = true;
-
             componenteVirar.Executar(componenteComandavel);
             yield return null;
 
