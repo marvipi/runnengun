@@ -60,9 +60,10 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_TodosOsFilhosAtivos_DesativaTodosOsFilhos()
+        public IEnumerator Executar_TodosOsFilhosAtivos_DesativaTodosOsFilhos(
+            [Values(2,6,3,19,5)] int qtdFilhos)
         {
-            InstanciarTresFilhos();
+            InstanciarFilhos(qtdFilhos);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -71,9 +72,10 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Executar_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes([Values(1,6,10,15,21)] int qtdFilhos)
+        public IEnumerator Executar_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes(
+            [Values(1,6,10,15,21)] int qtdFilhos)
         {
-            InstanciarFilhos((uint) qtdFilhos);
+            InstanciarFilhos(qtdFilhos);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -81,37 +83,14 @@ namespace ComportamentosTestSuite
             Assert.AreEqual(1, componenteDesativar.QtdRepeticoes);
         }
 
-
         [UnityTest]
-        public IEnumerator Executar_PrimeiroFilhoInativo_DesativaTodosOsFilhos()
+        public IEnumerator Executar_UmDosFilhosInativo_DesativaTodosOsFilhos(
+            [Values(3)] int qtdFilhos,
+            [Values(1, 2, 3)] int filhoNumero)
         {
-            InstanciarTresFilhos();
-            DesativarPrimeiroFilho();
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-
-            AssertTodosFilhosDesativados();
-        }
-
-
-        [UnityTest]
-        public IEnumerator Executar_FilhoDoMeioInativo_DesativaTodosOsFilhos()
-        {
-            InstanciarTresFilhos();
-            DesativarFilhoDoMeio();
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-
-            AssertTodosFilhosDesativados();
-        }
-
-        [UnityTest]
-        public IEnumerator Executar_UltimoFilhoInativo_DesativaTodosOsFilhos()
-        {
-            InstanciarTresFilhos();
-            DesativarUltimoFilho();
+            InstanciarFilhos(qtdFilhos);
+            var indiceFilho = filhoNumero - 1;
+            DesativarFilho(indiceFilho);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -165,10 +144,13 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_PrimeiroFilhoInativo_AtivaTodosOsFilhos()
+        public IEnumerator Reverter_UmDosFilhosInativo_AtivaTodosOsFilhos(
+            [Values(3)] int qtdFilhos,
+            [Values(1,2,3)] int filhoNumero)
         {
-            InstanciarTresFilhos();
-            DesativarPrimeiroFilho();
+            InstanciarFilhos(qtdFilhos);
+            var indiceFilho = filhoNumero - 1;
+            DesativarFilho(indiceFilho);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -179,37 +161,10 @@ namespace ComportamentosTestSuite
         }
 
         [UnityTest]
-        public IEnumerator Reverter_FilhoDoMeioInativo_AtivaTodosOsFilhos()
+        public IEnumerator Reverter_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes(
+            [Values(8, 3, 5, 84, 1)] int qtdFilhos)
         {
-            InstanciarTresFilhos();
-            DesativarFilhoDoMeio();
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-            componenteDesativar.Reverter(componenteComandavel);
-            yield return null;
-
-            AssertTodosOsFilhosAtivos();
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_UltimoFilhoInativo_AtivaTodosOsFilhos()
-        {
-            InstanciarTresFilhos();
-            DesativarUltimoFilho();
-
-            componenteDesativar.Executar(componenteComandavel);
-            yield return null;
-            componenteDesativar.Reverter(componenteComandavel);
-            yield return null;
-
-            AssertTodosOsFilhosAtivos();
-        }
-
-        [UnityTest]
-        public IEnumerator Reverter_TodosOsFilhosAtivos_QtdFilhosNaoAfetaQtdRepeticoes([Values(8, 3, 5, 84, 1)] int qtdFilhos)
-        {
-            InstanciarFilhos((uint) qtdFilhos);
+            InstanciarFilhos(qtdFilhos);
 
             componenteDesativar.Executar(componenteComandavel);
             yield return null;
@@ -235,15 +190,9 @@ namespace ComportamentosTestSuite
             }
         }
 
-        // Instancia três objetos de jogo e os coloca como filhos do boneco de teste.
-        // Para testar todos os pontos de variância, é necessário que o boneco de teste tenha pelo menos três filhos.
-        private void InstanciarTresFilhos()
-        {
-            InstanciarFilhos(3);
-        }
-
         // Instancia objetos de jogo e os coloca como filhos do boneco de teste.
-        private void InstanciarFilhos(uint qtdDeFilhos)
+        // Pressupõe que a qtdDeFilhos é maior ou igual a 0.
+        private void InstanciarFilhos(int qtdDeFilhos)
         {
             GameObject filhoDeTeste;
             string nomeDoFilho;
@@ -255,28 +204,8 @@ namespace ComportamentosTestSuite
             }
         }
 
-        // Pressupõe que o boneco de teste tem pelo menos um filho.
-        private void DesativarPrimeiroFilho()
-        {
-            var indicePrimeiroFilho = 0;
-            DesativarFilho(indicePrimeiroFilho);
-        }
-
-        // Pressupõe que o boneco de teste tem pelo menos três filhos.
-        private void DesativarFilhoDoMeio()
-        {
-            var indiceFilhoDoMeio = bonecoDeTeste.transform.childCount / 2;
-            DesativarFilho(indiceFilhoDoMeio);
-        }
-
-        // Pressupõe que o boneco de teste tem pelo menos um filho.
-        private void DesativarUltimoFilho()
-        {
-            var indiceUltimoFilho = bonecoDeTeste.transform.childCount - 1;
-            DesativarFilho(indiceUltimoFilho);
-        }
-
         // Desativa o filho do boneco de teste localizado no indice passado como argumento.
+        // Pressupõe que o indice é maior ou igual a zero e menor que a quantidade de filhos do boneco de teste.
         private void DesativarFilho(int indice)
         {
             var filho = bonecoDeTeste.transform.GetChild(indice);
