@@ -4,7 +4,7 @@ Runnengun é um jogo 2D de plataforma, no qual o jogador tem a capacidade de rev
 ### Propósito
 Estou desenvolvendo este projeto para pôr em prática os padrões de design e os princípios SOLID que aprendi no curso [Design Patterns](https://www.coursera.org/learn/design-patterns). Ele foi projetado para ter a modularidade como principal característica.
 ### Design
-![runnengun-design](runnengun-design.jpg)
+![runnengun-design](runnengun-design.png)
 
 Cada elemento do jogo tem funcionalidades atribuídas a ele dinamicamente. Elas são testadas individualmente, assegurando que elas funcionem em todos os elementos que supram os seus requisitos.
 
