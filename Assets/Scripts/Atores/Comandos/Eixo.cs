@@ -7,6 +7,6 @@ namespace Atores
     {
         Horizontal,
         Vertical,
-        HorizontalEVertical
+        Diagonal
     }
 }

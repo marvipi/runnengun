@@ -116,7 +116,7 @@ namespace ComandosTestSuite
                     break;
                 case Eixo.Vertical:
                     throw new System.NotImplementedException();
-                case Eixo.HorizontalEVertical:
+                case Eixo.Diagonal:
                     throw new System.NotImplementedException();
             }
         }
